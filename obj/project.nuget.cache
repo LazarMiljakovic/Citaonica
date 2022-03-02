@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "mbvvXTniWhDYkQu0fBlbxbnUN0EZ8y743c82CNHU2CfMMRF7pN5iLwmvF+Q3jaYU5upg+v6+NMM4PTjm2+7Amg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Lazar\\WebProjekat\\Citaonica\\Citaonica.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Lazar\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Lazar\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Lazar\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Lazar\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Lazar\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Lazar\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
