@@ -6,11 +6,13 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Models;
 
 namespace Citaonica
 {
@@ -26,6 +28,28 @@ namespace Citaonica
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<CitaonicaContext>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("CitaonicaCS"));
+
+            });
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS",builder =>
+                {
+                    builder.WithOrigins(new string[]
+                    {
+                        "http://localhost:8080",
+                        "https://localhost:8080",
+                        "http://127.0.0.1:8080",
+                        "https://127.0.0.1:8080",
+                    })
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                    
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -47,6 +71,8 @@ namespace Citaonica
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CORS");
 
             app.UseAuthorization();
 
