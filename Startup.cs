@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
@@ -33,6 +35,29 @@ namespace Citaonica
                 options.UseSqlServer(Configuration.GetConnectionString("CitaonicaCS"));
             });
 
+              
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CORS",builder =>
+                {
+                    builder.WithOrigins(new string[]
+                    {
+                        "http://localhost:8080",
+                        "https://localhost:8080",
+                        "http://127.0.0.1:8080",
+                        "https://127.0.0.1:8080",
+                        "http://localhost:5500",
+                        "https://localhost:5500",
+                        "http://127.0.0.1:5500",
+                        "https://127.0.0.1:5500"
+                    })
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                    
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -53,6 +78,8 @@ namespace Citaonica
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("CORS");
 
             app.UseAuthorization();
 

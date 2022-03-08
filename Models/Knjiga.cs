@@ -1,5 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 namespace Models
 {
@@ -9,17 +11,17 @@ namespace Models
     {
         [Key]
         public int ID { get; set; }
-
+        
         [Required]
-        [RegularExpression(@"^[a-zA-Z]+$")]
         public string Naziv { get; set; }
 
-        [Range(1,5)]
-        [Required]
-        public int Godina { get; set; }
 
-        public Fakultet Fakultet { get; set; }
-
+        [JsonIgnore]
         public Predmet Predmet { get; set; }
+
+        [Required]
+        [NotMapped]
+        public IFormFile File { get; set; } 
+
     }
 }

@@ -11,6 +11,10 @@ namespace Models
 
         public DbSet<Skripta> Skripte { get; set; }
 
+        public DbSet<Grad> Gradovi { get; set; }
+
+        public DbSet<Profesor> Profesori { get; set; }
+
         public CitaonicaContext(DbContextOptions options) : base(options)
         {
             

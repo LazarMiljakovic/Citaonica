@@ -26,10 +26,8 @@ namespace Citaonica.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Grad")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("GradID")
+                        .HasColumnType("int");
 
                     b.Property<string>("Naziv")
                         .IsRequired()
@@ -38,7 +36,25 @@ namespace Citaonica.Migrations
 
                     b.HasKey("ID");
 
+                    b.HasIndex("GradID");
+
                     b.ToTable("Fakultet");
+                });
+
+            modelBuilder.Entity("Models.Grad", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Naziv")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Grad");
                 });
 
             modelBuilder.Entity("Models.Knjiga", b =>
@@ -48,12 +64,6 @@ namespace Citaonica.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("FakultetID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Godina")
-                        .HasColumnType("int");
-
                     b.Property<string>("Naziv")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -62,8 +72,6 @@ namespace Citaonica.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("ID");
-
-                    b.HasIndex("FakultetID");
 
                     b.HasIndex("PredmetID");
 
@@ -94,7 +102,7 @@ namespace Citaonica.Migrations
                     b.ToTable("Predmet");
                 });
 
-            modelBuilder.Entity("Models.Skripta", b =>
+            modelBuilder.Entity("Models.Profesor", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -103,6 +111,41 @@ namespace Citaonica.Migrations
 
                     b.Property<int?>("FakultetID")
                         .HasColumnType("int");
+
+                    b.Property<string>("Ime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("PredmetID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Prezime")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("kancelarija")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("FakultetID");
+
+                    b.HasIndex("PredmetID");
+
+                    b.ToTable("Profesor");
+                });
+
+            modelBuilder.Entity("Models.Skripta", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Naziv")
                         .IsRequired()
@@ -113,14 +156,39 @@ namespace Citaonica.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("FakultetID");
-
                     b.HasIndex("PredmetID");
 
                     b.ToTable("Skripta");
                 });
 
+            modelBuilder.Entity("Models.Fakultet", b =>
+                {
+                    b.HasOne("Models.Grad", "Grad")
+                        .WithMany()
+                        .HasForeignKey("GradID");
+
+                    b.Navigation("Grad");
+                });
+
             modelBuilder.Entity("Models.Knjiga", b =>
+                {
+                    b.HasOne("Models.Predmet", "Predmet")
+                        .WithMany()
+                        .HasForeignKey("PredmetID");
+
+                    b.Navigation("Predmet");
+                });
+
+            modelBuilder.Entity("Models.Predmet", b =>
+                {
+                    b.HasOne("Models.Fakultet", "Fakultet")
+                        .WithMany("listaPredmeta")
+                        .HasForeignKey("FakultetID");
+
+                    b.Navigation("Fakultet");
+                });
+
+            modelBuilder.Entity("Models.Profesor", b =>
                 {
                     b.HasOne("Models.Fakultet", "Fakultet")
                         .WithMany()
@@ -135,26 +203,11 @@ namespace Citaonica.Migrations
                     b.Navigation("Predmet");
                 });
 
-            modelBuilder.Entity("Models.Predmet", b =>
-                {
-                    b.HasOne("Models.Fakultet", "Fakultet")
-                        .WithMany("listaPredmeta")
-                        .HasForeignKey("FakultetID");
-
-                    b.Navigation("Fakultet");
-                });
-
             modelBuilder.Entity("Models.Skripta", b =>
                 {
-                    b.HasOne("Models.Fakultet", "Fakultet")
-                        .WithMany()
-                        .HasForeignKey("FakultetID");
-
                     b.HasOne("Models.Predmet", "Predmet")
                         .WithMany()
                         .HasForeignKey("PredmetID");
-
-                    b.Navigation("Fakultet");
 
                     b.Navigation("Predmet");
                 });

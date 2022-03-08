@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace Models
 {
@@ -11,16 +12,15 @@ namespace Models
         [Key]
         public int ID { get; set; } 
 
-        [RegularExpression(@"^[a-zA-Z]+$")]
+        
         [Required]
         [MaxLength(50)]
         public string Naziv { get; set; }
 
-        [RegularExpression(@"^[a-zA-Z]+$")]
-        [Required]
-        [MaxLength(50)]
-        public string Grad { get; set; }
+        [JsonIgnore]
+        public Grad Grad { get; set; }
         
-        public List<Predmet> listaPredmeta { get; set; }
+        [JsonIgnore]
+        public  List<Predmet> listaPredmeta { get; set; }
     }
 }
