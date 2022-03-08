@@ -1,0 +1,45 @@
+.izborGradova{
+    display: flex;
+    justify-content: center;
+}
+.formaF
+{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.BoxFakultet
+{
+    width: 320px;
+    padding: 10px;
+    border: 5px solid black;
+    margin: 0;
+}
+
+.BoxFakultet:hover
+{
+    background-color: yellow;
+}
+
+.BoxFakultet:focus
+{
+    background-color: aqua;
+}
+
+.PPDugme
+{
+    width: 320px;
+    padding: 10px;
+    margin: 0;
+}
+
+.PPDugme:hover
+{
+    background-color: aquamarine;
+}
+
+.PPDugme:focus
+{
+    background-color: springgreen;
+}
+
