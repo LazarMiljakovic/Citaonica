@@ -14,10 +14,14 @@ export class Profesor
 
     crtajProfesora(host)
     {
+        let profesorispisdiv = document.createElement("div");
+        profesorispisdiv.className = "ispisprofesor";
+        host.appendChild(profesorispisdiv);
+
         let ProfesorLab = document.createElement("label");
         ProfesorLab.className = "profesor";
         ProfesorLab.innerHTML = this.ime + "    " + this.prezime + "        email:"+ this.email + "     Kancelarija:"+this.kancelarija;
-        host.appendChild(ProfesorLab);
+        profesorispisdiv.appendChild(ProfesorLab);
 
     }
 

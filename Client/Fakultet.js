@@ -60,7 +60,9 @@ export class Fakultet
 
     CrtajDugmeZaPP(host)
     {
-        
+        let PPIZBOR = document.createElement("div");
+        PPIZBOR.className = "PPIZB"
+        host.appendChild(PPIZBOR);
 
         let dugmeProfesor = document.createElement("button");
         dugmeProfesor.onclick=(ev)=>
@@ -70,7 +72,7 @@ export class Fakultet
         }
         dugmeProfesor.innerHTML = "Profesori";
         dugmeProfesor.className = "PPDugme";
-        host.appendChild(dugmeProfesor);
+        PPIZBOR.appendChild(dugmeProfesor);
 
         let dugmePredmet = document.createElement("button");
         dugmePredmet.onclick=(ev)=>
@@ -80,7 +82,7 @@ export class Fakultet
         }
         dugmePredmet.innerHTML = "Predmeti";
         dugmePredmet.className = "PPDugme";
-        host.appendChild(dugmePredmet);
+        PPIZBOR.appendChild(dugmePredmet);
 
 
     }
@@ -131,7 +133,8 @@ export class Fakultet
                     
                 }
                 dugmeDodajPredmet.innerHTML = "DodajPredmet";
-                host.appendChild(dugmeDodajPredmet);
+                dugmeDodajPredmet.className = "dodajpredmetb";
+                profesorDiv.appendChild(dugmeDodajPredmet);
                 if(predmeti[0]!= null)
                 {
                     this.IzborGodine(profesorDiv,listaPredmeta);
@@ -182,7 +185,7 @@ export class Fakultet
                 let profesorDiv = this.ObrisiResetuj(host);
                 
                 
-
+                
 
 
                 let dugmeDodajProf = document.createElement("button");
@@ -236,12 +239,16 @@ export class Fakultet
     }
     IzborGodine(host, lista)
     {
+        let predmetdiv = document.createElement("div");
+        predmetdiv.className = "predmetdiv";
+        host.appendChild(predmetdiv);
+
         let izbGodinu = document.createElement("label");
         izbGodinu.innerHTML = "Izaberi godinu: ";
-        host.appendChild(izbGodinu);
+        predmetdiv.appendChild(izbGodinu);
 
         let SelectGodinu = document.createElement("select");
-        host.appendChild(SelectGodinu);
+        predmetdiv.appendChild(SelectGodinu);
         
         let j = 0;
         let listaGodina = [];
@@ -352,18 +359,22 @@ export class Fakultet
         dod.className = "dod";
         host.appendChild(dod);
 
-        let n = document.createElement("label");
-        n.innerHTML = "Ime Predmeta";
-        n.className = "labpredmet";
-        dod.appendChild(n);
+        
 
         let ulaz = document.createElement("input");
+        ulaz.placeholder = " Predmet";
+        ulaz.type = "text";
         ulaz.className = "inputpredmet";
         dod.appendChild(ulaz);
 
+        let gs = document.createElement("label");
+        gs.innerHTML = "Godina predmeta:  ";
+        gs.className = "labgodin";
+        dod.appendChild(gs);
+
         let SelectG = document.createElement("select");
         dod.appendChild(SelectG);
-        let i = 0
+        let i = 1
         for(i;i<6;i++)
         {
             let G;
@@ -439,46 +450,40 @@ export class Fakultet
                 host.removeChild(host.lastElementChild);
             }
         }
-        let DP = document.createElement("label");
-        DP.innerHTML = "Dodaj Profesora:";
-        DP.className = "DP";
-        host.appendChild(DP);
+        let divProfsoraDodavanje = document.createElement("div");
+        divProfsoraDodavanje.className = "divDodavanjeProfesora";
+        host.appendChild(divProfsoraDodavanje);
 
-        let ime = document.createElement("label");
-        ime.innerHTML = "Ime";
-        ime.className = "ime";
-        host.appendChild(ime);
+        let DP = document.createElement("label");
+        DP.innerHTML = "Dodaj Profesora:  ";
+        DP.className = "DP";
+        divProfsoraDodavanje.appendChild(DP);
+
 
         let imeI = document.createElement("input");
+        imeI.placeholder = " Ime";
+        imeI.type = "text";
         imeI.className = "imeI";
-        host.appendChild(imeI);
+        divProfsoraDodavanje.appendChild(imeI);
 
-        let prezime = document.createElement("label");
-        prezime.innerHTML = "Prezime";
-        prezime.className = "prezime";
-        host.appendChild(prezime);
 
         let prezimeI = document.createElement("input");
+        prezimeI.placeholder = " Prezime";
+        prezimeI.type = "text";
         prezimeI.className = "prezimeI";
-        host.appendChild(prezimeI);
-
-        let email = document.createElement("label");
-        email.innerHTML = "email";
-        email.className = "email";
-        host.appendChild(email);
+        divProfsoraDodavanje.appendChild(prezimeI);
 
         let emailI = document.createElement("input");
+        emailI.placeholder = " Email";
+        emailI.type = "text";
         emailI.className = "emailI";
-        host.appendChild(emailI);
-
-        let Kanc = document.createElement("label");
-        Kanc.innerHTML = "Kancelarija";
-        Kanc.className = "Kanc";
-        host.appendChild(Kanc);
+        divProfsoraDodavanje.appendChild(emailI);
 
         let KancI = document.createElement("input");
+        KancI.placeholder = " Kancelarija";
+        KancI.type = "text";
         KancI.className = "KancI";
-        host.appendChild(KancI);
+        divProfsoraDodavanje.appendChild(KancI);
 
         let listaPredmeta = [];
 
@@ -492,10 +497,10 @@ export class Fakultet
 
                 let izbPred = document.createElement("label");
                 izbPred.innerHTML = "Izaberi predmet: ";
-                host.appendChild(izbPred);
+                divProfsoraDodavanje.appendChild(izbPred);
 
                 let SelecPred = document.createElement("select");
-                host.appendChild(SelecPred);
+                divProfsoraDodavanje.appendChild(SelecPred);
                 
                 let OpcijePred;
                 console.log(listaPredmeta);
@@ -516,7 +521,7 @@ export class Fakultet
                 }
                 dugmeDodajProfS.innerHTML = "Dodaj";
                 dugmeDodajProfS.className = "DodajProfs";
-                host.appendChild(dugmeDodajProfS);
+                divProfsoraDodavanje.appendChild(dugmeDodajProfS);
 
                 let dugmeugasi = document.createElement("button")
                 dugmeugasi.onclick=(ev)=>{
@@ -526,7 +531,7 @@ export class Fakultet
                     }
                 }
                 dugmeugasi.innerHTML = "Prekini";
-                host.appendChild(dugmeugasi);
+                divProfsoraDodavanje.appendChild(dugmeugasi);
 
             })
         })

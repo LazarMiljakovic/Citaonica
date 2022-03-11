@@ -27,11 +27,8 @@ export class Citaonica
 
     crtajFormu(host,hostkont)
     {
-        let izbGrad = document.createElement("label");
-        izbGrad.innerHTML = "Izaberi grad: ";
-        host.appendChild(izbGrad);
-
         let SelectGrad = document.createElement("select");
+        SelectGrad.className = "selectGrad";
         host.appendChild(SelectGrad);
 
         let OpcijeGrad;
@@ -108,12 +105,10 @@ export class Citaonica
     CrtajDodajGrad(host)
     {
 
-        let n = document.createElement("label");
-        n.innerHTML = "Ime grada";
-        n.className = "labGrad";
-        host.appendChild(n);
 
         let ulaz = document.createElement("input");
+        ulaz.type = "text";
+        ulaz.placeholder = " Grad";
         ulaz.className = "inputGrad";
         host.appendChild(ulaz);
         
@@ -174,6 +169,10 @@ export class Citaonica
         let opcija = this.kont.querySelector("select");
         var GradID = opcija.options[opcija.selectedIndex].value;
 
+        let FaksDIV = document.createElement("div");
+        FaksDIV.className = "faksdiv";
+        host.appendChild(FaksDIV)
+
         let BoxD = document.createElement("button");
         BoxD.onclick=(ev)=>
         {
@@ -195,9 +194,9 @@ export class Citaonica
         }
         BoxD.innerHTML = "Dodaj Fakultet";
         BoxD.className = "BoxFakultet";
-        host.appendChild(BoxD);
+        FaksDIV.appendChild(BoxD);
         
-        this.IzaberiFakultet(GradID,host);
+        this.IzaberiFakultet(GradID,FaksDIV);
 
 
     }
@@ -251,12 +250,11 @@ export class Citaonica
         kontformaDFakulteta.className = "Dodav";
         host.appendChild(kontformaDFakulteta);
 
-        let nazivF = document.createElement("label");
-        nazivF.innerHTML = "Naziv fakulteta: ";
-        nazivF.className = "nazivF";
-        kontformaDFakulteta.appendChild(nazivF);
+
 
         let nazivFI = document.createElement("input");
+        nazivFI.type = "text";
+        nazivFI.placeholder = " Fakultet";
         nazivFI.className = "nazivFI";
         kontformaDFakulteta.appendChild(nazivFI);
 

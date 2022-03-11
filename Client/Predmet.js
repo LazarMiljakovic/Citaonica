@@ -30,7 +30,7 @@ export class Predmet
 
         }
         PredmetBtn.className = "predmetCheck";
-        host.appendChild(PredmetBtn);
+        this.kont.appendChild(PredmetBtn);
         
 
     }
@@ -47,33 +47,37 @@ export class Predmet
         this.kont.className = "skripteknjigeizbor";
         document.body.appendChild(this.kont);
 
+        let izborKnjSkr = document.createElement("div");
+        izborKnjSkr.className = "izborKnjSkr";
+        this.kont.appendChild(izborKnjSkr);
+
         let l1 = document.createElement("label");
         l1.innerHTML = "Knjige";
-        this.kont.appendChild(l1);
+        izborKnjSkr.appendChild(l1);
 
         let knjigecb = document.createElement("input");
         knjigecb.type = "checkbox";
         knjigecb.value = "knjige";
-        this.kont.appendChild(knjigecb);
+        izborKnjSkr.appendChild(knjigecb);
 
         let l2 = document.createElement("label");
         l2.innerHTML = "Skripte";
-        this.kont.appendChild(l2);
+        izborKnjSkr.appendChild(l2);
 
         let skriptecb = document.createElement("input");
         skriptecb.type = "checkbox";
         skriptecb.value = "skripte";
-        this.kont.appendChild(skriptecb);
+        izborKnjSkr.appendChild(skriptecb);
 
         let KnjSkrBtn = document.createElement("button");
         KnjSkrBtn.innerHTML = "Pretrazi";
         KnjSkrBtn.onclick=(ev)=>
         {
-            this.Opcije(this.kont,KSforma);
+            this.Opcije(izborKnjSkr,KSforma);
 
         }
         KnjSkrBtn.className = "PretraziKnjigeSkripte";
-        this.kont.appendChild(KnjSkrBtn);
+        izborKnjSkr.appendChild(KnjSkrBtn);
 
         
 
@@ -93,7 +97,7 @@ export class Predmet
 
         }
         uploadBtn.className = "upluduj";
-        this.kont.appendChild(uploadBtn);
+        izborKnjSkr.appendChild(uploadBtn);
         
 
         let KSforma = document.createElement("div");
