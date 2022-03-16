@@ -49,7 +49,7 @@ namespace Citaonica.Controllers
                     var predmet = await Context.Predmeti.Where(p=>p.ID == predmetID).FirstOrDefaultAsync();
                     if(CheckIfPDFFile(file))
                     {
-                        await WriteFile(file,predmet.ID.ToString());
+                        await UpisiFajl(file,predmet.ID.ToString());
                     }
                     else{
                         return BadRequest(new { message = "Dokument nije pdf" });
@@ -82,14 +82,14 @@ namespace Citaonica.Controllers
             var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
             return (extension == ".pdf" || extension == ".pdf"); 
         }
-        private async Task<bool> WriteFile(IFormFile file,string IdPredmeta)
+        private async Task<bool> UpisiFajl(IFormFile file,string IdPredmeta)
         {
-            bool isSaveSuccess = false;
+            bool UspesnoSacuvano = false;
             string fileName;
             try
             {
                 var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
-                fileName = file.FileName; //Create a new Name for the file due to security reasons.
+                fileName = file.FileName; 
 
                 var pathBuilt = Path.Combine(Directory.GetCurrentDirectory(), "UploadS\\"+IdPredmeta);
 
@@ -106,14 +106,14 @@ namespace Citaonica.Controllers
                     await file.CopyToAsync(stream);
                 }
 
-                isSaveSuccess = true;
+                UspesnoSacuvano = true;
             }
             catch (Exception e)
             {
                 Content(e.Message);
             }
 
-            return isSaveSuccess;
+            return UspesnoSacuvano;
         }
 
         [Route("PreuzmiKnjigu/{Idpredmeta}/{imeFajla}")]
