@@ -204,7 +204,7 @@ export class Predmet
                     
                 }
                 else{
-                    alert("Nema knjiga za izabrani Fakultet");
+                    alert("Nema skripta za izabrani Fakultet");
                 }
 
 
